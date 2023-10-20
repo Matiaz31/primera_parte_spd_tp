@@ -12,11 +12,17 @@
 #define decena A4
 #define unidad A5
 #define Apagados 1
+#define Switch 3
+#define FSR A0
+#define FotoDiodo A3
 
 int countDigit = 0;
 int sumaPrevia = 1;
 int restaPrevia = 1;
 int resetPrevia = 1;
+int valorSwitch;
+int numero = 0;
+int lectorluz;
 
 void setup() 
 {
@@ -37,36 +43,91 @@ void setup()
     digitalWrite(decena, LOW);
     digitalWrite(unidad, LOW);
 
+  	pinMode(Switch, INPUT);
+  	pinMode(FotoDiodo, INPUT);
+  
     Serial.begin(9600);
 }
 
+int fsrReading = 0;
+
 void loop()
 {
+  lectorluz = analogRead(FotoDiodo);
+  if(lectorluz > 0)
+  {
+  Serial.println(lectorluz);
+  fsrReading = analogRead(FSR);
     
-    int pressed = KeyPressed();
-    if (pressed == pulsador_mas)
-    {
+  if(fsrReading == 0)
+{
+  	valorSwitch = digitalRead(Switch);
+  	if (valorSwitch == 1)
+  	{
+      int pressed = KeyPressed();
+      if (pressed == pulsador_mas)
+      {
         countDigit++;
-        if (countDigit > 99)
-        {
+         if (countDigit > 99)
+         {
             countDigit = 0;
-        }
+         }
+      }
+      else if (pressed == pulsador_menos)
+      {
+         countDigit--;
+         if (countDigit < 0)
+         {
+             countDigit = 99;
+         }
+      }
+      else if (pressed == pulsador_reset)
+      {
+         countDigit = 0;
+      }
+      printCount(countDigit);
     }
-    else if (pressed == pulsador_menos)
-    {
-        countDigit--;
-        if (countDigit < 0)
-        {
-            countDigit = 99;
-        }
-    }
-    else if (pressed == pulsador_reset)
-    {
-        countDigit = 0;
-    }
-    Serial.println(countDigit);
+  
+  if (valorSwitch == 0)
+  {
+    int pressed = KeyPressed();
+      if (pressed == pulsador_mas)
+      {
+         countDigit = obtenerNumeroPrimoSiguiente(countDigit);
+      	 if (countDigit > 99)
+         {
+            countDigit = 0;
+         }
+      }
+      else if (pressed == pulsador_menos)
+      {
+         countDigit = obtenerNumeroPrimoAnterior(countDigit);
+      	 if (countDigit <= 1)
+         {
+             countDigit = 97;
+         }
+      }
+      else if (pressed == pulsador_reset)
+      {
+         countDigit = 0;
+         
+      }
+   		printCount(countDigit);
+  }
+  }
+  else
+  {
+    printCount(fsrReading);
+    Serial.println(fsrReading);
+    countDigit = 0;
+  }
+  }
+  else
+  {
+    countDigit = 0;
     printCount(countDigit);
-  delay(25);
+  }
+    delay(25);
 }
 
 void printDigit(int digit)
@@ -228,4 +289,45 @@ int KeyPressed(void)
         return pulsador_reset;
     }
     return 0;
+}
+
+bool esPrimo(int n)
+{
+  if (n <= 1)
+  {
+    return false;  // Los nÃºmeros menores o iguales a 1 no son primos
+  }
+
+  for (int i = 2; i < n; i++)
+  {
+    if (n % i == 0)
+    {
+      return false; // Si n es divisible por i, entonces n no es primo
+    }
+  }
+
+  return true; // Si no se encontraron divisores, n es primo
+}
+
+int obtenerNumeroPrimoSiguiente(int num)
+{
+  int siguiente = num + 1;
+  while (!esPrimo(siguiente))
+  {
+    siguiente++;
+  }
+  return siguiente;
+}
+
+int obtenerNumeroPrimoAnterior(int num)
+{
+  int anterior = num - 1;
+  while (anterior >= 2)
+  {
+    if (esPrimo(anterior))
+    {
+      return anterior;
+    }
+    anterior--;
+  }
 }
