@@ -66,4 +66,4 @@ Esta placa *Arduino* está programada para mostrar o bien, un **contador de 00 a
 
 ## Punto 1 
 Considerando mi documento terminado en "6" me toco utilizar el FotoDiodo, Conectado a una resistencia me devuelve un numero entre 0 y 5, este lo implemente en el codigo como una "Bandera" para saber si el lugar donde se estaria usando esta placa tenga luz, si no recibe luz no puede ejecutarse el Loop principal. 
-## [PUNTO 1 FOTODIODO INTEGRADO](https://www.tinkercad.com/things/b2TSiozcTnV-copy-of-parcial-spd-parte-23/editel?sharecode=HAIkWHHtM_FS-BGM8IQr1h9OlBP4F37mE-vnlcoPLEs)
+## [FOTODIODO INTEGRADO](https://www.tinkercad.com/things/b2TSiozcTnV-copy-of-parcial-spd-parte-23/editel?sharecode=HAIkWHHtM_FS-BGM8IQr1h9OlBP4F37mE-vnlcoPLEs)
