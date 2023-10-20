@@ -56,5 +56,14 @@ Esta placa *Arduino* está programada para mostrar o bien, un **contador de 00 a
 ## [Punto 3. Sensor de fuerza integrado 👌](https://www.tinkercad.com/things/1SZODqVE3e5-copy-of-parcial-spd-parte-2/editel?sharecode=eZVIWxGrSvyQJ190PpIykL3CGXaB3nifWvqpYovs5QY "Nuestro Proyecto😊")0
 ![Imagen](https://media.discordapp.net/attachments/1134581114934136892/1165027598120796240/image.png?ex=65455b80&is=6532e680&hm=0ba9eccf3526dc3cea3834ac0dbee70246172ed1d76327d7bf9d08eba4bb0123&=&width=1371&height=676)
 
+
+
 ## Descripción
 Esta placa *Arduino* está programada para mostrar o bien, un **contador de 00 a 99**, o un **contador de número primos**. Para realizar esta tarea se vale de un **Interruptor Deslizante**. Para modificar los contadores cuenta con **3 pulsadores**, uno para sumar, otro para restar y un tercero para volver al contador a 00. Además está conectada a un **Sensor de fuerza** que mide de 0 a 10 Newtons. Gracias a que la resistencia esta en 128 Ω muestra un numero del 00 al 99 dependiendo de la cantidad de Newtons que detecte. Si no detecta Newtons, funciona el código anterior.
+
+# Tercera parte del parcial Arduino
+![imagen](https://github.com/Matiaz31/primera_parte_spd_tp/assets/135190998/3e4b118e-9882-44da-8f04-0f26ea4fc39b)
+
+## Punto 1 
+Considerando mi documento terminado en "6" me toco utilizar el FotoDiodo, Conectado a una resistencia me devuelve un numero entre 0 y 5, este lo implemente en el codigo como una "Bandera" para saber si el lugar donde se estaria usando esta placa tenga luz, si no recibe luz no puede ejecutarse el Loop principal. 
+## [PUNTO 1 FOTODIODO INTEGRADO](https://www.tinkercad.com/things/b2TSiozcTnV-copy-of-parcial-spd-parte-23/editel?sharecode=HAIkWHHtM_FS-BGM8IQr1h9OlBP4F37mE-vnlcoPLEs)
